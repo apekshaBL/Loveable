@@ -4,7 +4,9 @@ import com.example.Loveable.dto.project.ProjectRequest;
 import com.example.Loveable.dto.project.ProjectResponse;
 import com.example.Loveable.dto.project.ProjectSummaryResponse;
 import com.example.Loveable.service.ProjectService;
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
+import lombok.experimental.FieldDefaults;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,8 +16,9 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/projects")
 @AllArgsConstructor
+@FieldDefaults(makeFinal = true,level = AccessLevel.PRIVATE)
 public class ProjectController {
-    private final ProjectService projectService;
+    ProjectService projectService;
 
     @GetMapping//get all projects of the auth user
     public ResponseEntity<List<ProjectSummaryResponse>>getMyProjects(){

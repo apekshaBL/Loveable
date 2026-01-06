@@ -4,7 +4,9 @@ package com.example.Loveable.controller;
 import com.example.Loveable.dto.project.FileContentResponse;
 import com.example.Loveable.dto.project.FileNode;
 import com.example.Loveable.service.FileService;
+import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
+import lombok.experimental.FieldDefaults;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,8 +18,9 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/projects/{projectId}/files")
+@FieldDefaults(makeFinal = true,level = AccessLevel.PRIVATE)
 public class FileController {
-    private final FileService fileService;
+    FileService fileService;
     @GetMapping
     public ResponseEntity<List<FileNode>>getFileTree(@PathVariable Long projectId){
         Long userId=1L;
