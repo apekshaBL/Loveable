@@ -11,7 +11,7 @@ import lombok.experimental.FieldDefaults;
 
 import java.time.Instant;
 
-@Entity
+//@Entity
 @Getter
 @Setter
 @FieldDefaults(level= AccessLevel.PRIVATE)
