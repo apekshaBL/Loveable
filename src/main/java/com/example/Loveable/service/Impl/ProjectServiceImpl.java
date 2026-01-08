@@ -16,6 +16,7 @@ import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -39,7 +40,11 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public List<ProjectSummaryResponse> getUserProjects(Long userId) {
-        return List.of();
+       /* return projectRepository.findAllAccessibleByUser(userId).stream()
+                .map(projectMapper::toProjectSummaryResponse)
+                .collect(Collectors.toList());*/
+        var projects=projectRepository.findAllAccessibleByUser(userId);
+        return projectMapper.toListOfProjectSummaryResponse(projects);
     }
 
     @Override
