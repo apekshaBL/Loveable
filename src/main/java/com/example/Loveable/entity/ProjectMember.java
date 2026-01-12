@@ -1,29 +1,35 @@
 package com.example.Loveable.entity;
 
 import com.example.Loveable.enums.ProjectRole;
-import jakarta.persistence.Entity;
-import jakarta.persistence.OneToMany;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.Setter;
+import jakarta.persistence.*;
+import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import java.time.Instant;
 
-//@Entity
+@Entity
 @Setter
 @Getter
 @FieldDefaults(level = AccessLevel.PRIVATE)
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+@Table(name="project_members")
 public class ProjectMember {
+    @EmbeddedId
     ProjectMemberId id;
 
-    @OneToMany
+    @ManyToOne
+    @MapsId("projectId")
     Project project;
 
-    @OneToMany
+    @ManyToOne
+    @MapsId("userId")
     User user;
 
-    ProjectRole role;
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    ProjectRole projectRole;
 
     Instant invitedAt;
     Instant acceptedAt;
