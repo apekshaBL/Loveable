@@ -59,6 +59,9 @@ public class ProjectServiceImpl implements ProjectService {
     @Override
     public ProjectResponse updateProject(Long id, ProjectRequest request, Long userId) {
         Project project = getAccessibleProjectById(id,userId);
+        if(!project.getOwner().getId().equals(userId)){
+            throw new RuntimeException("You are not allowed to update the name");
+        }
         project.setName(request.name());
         project=projectRepository.save(project);
         return projectMapper.toProjectResponse(project);
